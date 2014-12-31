@@ -8,6 +8,6 @@ Compile the file:
 
 ```g++ file.cpp```
 
-Then you see the output by:
+Then you can see the output by:
 
-```./a.out```
+```Running the executable file.```
