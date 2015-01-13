@@ -1,0 +1,9 @@
+#Implemented
+<ul>
+    <li>Bfs</li>
+    <li>Dfs</li>
+    <li>Dijkstra</li>
+    <li>Prims</li>
+    <li>Krushkal</li>
+</ul>
+##Todo:
