@@ -7,6 +7,7 @@ int main()
 {
 	int i,j,adj[max][max],color[max],queue[5];
 	fstream f;
+	//reading adjacency matrix from file
 	f.open("data/graph.txt",ios::in);
 	for(i=0;i<5;i++)
 	{
