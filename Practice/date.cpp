@@ -1,6 +1,6 @@
 /*
 Sorting a list of dates.
- */
+*/
 #include <iostream>
 using namespace std;
 
