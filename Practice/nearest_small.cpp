@@ -10,29 +10,31 @@ using namespace std;
 
 int main()
 {
-	int arr[50], i, near=0;
+	int arr[50], i, near=0, min=0,n;
 	cout << "Enter no. of elements";
 	cin >> n;
 	for(i = 0;i < n;i++)
 		cin >> arr[i];
 
-	cout << "_";
+	cout << "_,";
 	for(i = 1;i < n;i++)
 	{
-		if(a[i-1] < a[i])
-		{
-			near = i-1;
-			cout << a[near];
-		}
+		if (arr[i] > arr[near])
+			cout << arr[near];
 
-		else if(a[i] < a[near])
-		{
-			cout << "_";
-			near = i;
-		}
+		else if (arr[i] > arr[min])
+			cout << arr[min];
+
 		else
 		{
-			cout << "handle this";
+			cout << "_,";
+			min = i;
+			near = i;
+		}
+
+		if (arr[i] < arr[i+1])
+		{
+			near = i;	
 		}
 	}
 	return 0;
