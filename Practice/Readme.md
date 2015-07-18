@@ -2,4 +2,4 @@
 
 #Todo:
 
-1. Search an element in a sorted and pivoted array.
+1. Maximum sum such that no two elements are adjacent.
