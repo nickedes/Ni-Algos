@@ -25,7 +25,6 @@ void new_node(struct node **head,int data)
             temp = temp->next;
         temp->next = ptr;
     }
-    //cout<<ptr->data;
 }
 
 void loop(struct node *head,int b)
@@ -45,8 +44,6 @@ void loop(struct node *head,int b)
 
 void display(struct node *head)
 {
-  //struct node *temp;
-  //temp = head;
  int c=0;
   while(c<=10 && head!=NULL)
   {
@@ -60,35 +57,26 @@ void display(struct node *head)
 int loopdetect(struct node *head)
 {
     struct node *slow,*fast,*temp;
-    //temp = new node;
-    //temp->next = NULL;
-    //temp->data = 0;
-    /*slow = new node;
-    fast = new node;*/
     slow = head;
     fast = head;
     slow=slow->next;
     fast=(fast->next)->next;
 
-    while(slow != fast && fast!=NULL)
+    while(slow != fast && fast->next!=NULL && fast->next->next!=NULL)
     {
-        //cout<<"\n\nSharan";
         slow = slow->next;
         fast = (fast->next)->next;
     }
-    //temp = slow;
-    //cout<<"\n"<<temp->data;
 
     if(slow == fast)
         {
-            cout<<"\n\nADFassdf";
             slow = head;
             while(slow != fast)
             {
                 slow = slow->next;
                 fast = fast->next;
             }
-            cout <<"\n\n"<<slow->data;
+            cout <<"\n"<<slow->data;
         }
     else
         return 0;
@@ -109,7 +97,6 @@ int main()
         switch(ch)
         {
             case 1:
-
                 cin>>data;
                 new_node(&head,data);
                 display(head);
@@ -126,6 +113,8 @@ int main()
                 loopexist = loopdetect(head);
                 if(loopexist == 0)
                     cout<<"no loop";
+                else
+                    cout << "Loop detected!";
         }
     }
     while(ch!=4);
