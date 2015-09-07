@@ -44,13 +44,6 @@ int main()
 			j++;
 		}
 	}
-	/*
-	for(int k = 0; k<num_stats; k++)
-	{
-		for (int m=0;m<j;m++)
-			cout << mat[k][m] << " ";
-		cout <<endl;
-	}*/
 
 	num_inputs = j-1;
 	cin>>str;
