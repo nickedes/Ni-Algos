@@ -10,8 +10,9 @@ struct node
 	struct node* right;
 };
 
-node* insert(struct node* head, int value)
+node* insert(int value)
 {
+	/*
 	if (head == NULL)
 	{
 		head->data = value;
@@ -23,11 +24,24 @@ node* insert(struct node* head, int value)
 		// insert in appropriate subtree.
 	}
 	return head;
+	*/
+	struct node *temp = new node;
+	temp->data = value;
+	temp->left = NULL;
+	temp->right = NULL;
+	return temp;
 }
 
 int main()
 {
-	node *head = NULL;
+	//node *head = NULL;
+	/*create a tree*/ 
+	struct node *root = insert(1);
+	root->left        = insert(2);
+	root->right       = insert(3);
+	root->left->left  = insert(4);
+	root->left->right = insert(5);
 
+	cout << root->left->data;
 	return 0;
 }
