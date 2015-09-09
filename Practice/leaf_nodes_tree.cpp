@@ -49,6 +49,11 @@ int count_leaf(struct node *temp)
 	}
 }
 
+int max(int a, int b)
+{
+	return a > b ? a:b ;
+}
+
 int depth(struct node *temp)
 {
 	if(temp == NULL)
@@ -66,9 +71,10 @@ int main()
 	root->right = insert(3);
 	root->left->left = insert(4);
 	root->left->right = insert(5);
+	root->left->left->left = insert(8);
+	// cout << root->left->data;
 
-	cout << root->left->data;
-
-	cout << count_leaf(root);
+	cout << "No. of Leaf nodes- " << count_leaf(root);
+	cout << endl << "Height of tree - " << depth(root);
 	return 0;
 }
