@@ -32,16 +32,34 @@ node* insert(int value)
 	return temp;
 }
 
+int count_leaf(struct node *temp)
+{
+	if(temp == NULL)
+		return 0;
+	else if(temp->left == NULL && temp->right == NULL)
+		return 1;
+	else
+	{
+		int left_leaf = 0,right_leaf = 0;
+		left_leaf = count_leaf(temp->left);
+		right_leaf = count_leaf(temp->right);
+		return right_leaf+left_leaf;
+	}
+}
+
 int main()
 {
 	//node *head = NULL;
 	/*create a tree*/ 
-	struct node *root = insert(1);
-	root->left        = insert(2);
-	root->right       = insert(3);
-	root->left->left  = insert(4);
+	struct node *root ;
+	root = insert(1);
+	root->left = insert(2);
+	root->right = insert(3);
+	root->left->left = insert(4);
 	root->left->right = insert(5);
 
 	cout << root->left->data;
+
+	cout << count_leaf(root);
 	return 0;
 }
