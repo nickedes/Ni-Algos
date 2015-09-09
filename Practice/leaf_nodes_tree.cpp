@@ -36,6 +36,8 @@ int count_leaf(struct node *temp)
 {
 	if(temp == NULL)
 		return 0;
+
+	// This node is a leaf node!
 	else if(temp->left == NULL && temp->right == NULL)
 		return 1;
 	else
@@ -47,6 +49,13 @@ int count_leaf(struct node *temp)
 	}
 }
 
+int depth(struct node *temp)
+{
+	if(temp == NULL)
+		return 0;
+	else
+		return 1 + max(depth(temp->left),depth(temp->right));
+}
 int main()
 {
 	//node *head = NULL;
