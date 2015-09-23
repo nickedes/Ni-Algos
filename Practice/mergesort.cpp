@@ -58,7 +58,6 @@ void mergesort(int arr[], int low, int high)
 	}
 }
 
-
 int main()
 {
 	int array[20], num;
