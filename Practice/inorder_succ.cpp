@@ -28,6 +28,14 @@ node* newNode(int key)
 
 int main()
 {
-
+	struct node* root = NULL;
+	root = newNode(20);
+	root->left = newNode(10);
+	root->right = newNode(30);
+	root->left->left = newNode(5);
+	root->right->right = newNode(40);
+	temp = root->left->left;
+	succ = inorderSucc(temp);
+	cout << succ->data;
 	return 0;
 }
