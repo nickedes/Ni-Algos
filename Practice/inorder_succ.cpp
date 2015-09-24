@@ -13,9 +13,24 @@ struct node
 	node* right;
 };
 
-node* inorderSucc(node* temp)
+node* leftest(node* ptr)
 {
-	return temp;
+	while(ptr->left!=NULL)
+		ptr = ptr->left;
+	return ptr;
+}
+
+node* inorderSucc(node* root, node* temp)
+{
+	if(temp->right != NULL)
+	{
+		return leftest(temp->right);
+	}
+	else
+	{
+		// TODO
+		return temp;
+	}
 }
 
 node* newNode(int key)
@@ -35,7 +50,7 @@ int main()
 	root->left->left = newNode(5);
 	root->right->right = newNode(40);
 	temp = root->left->left;
-	succ = inorderSucc(temp);
+	succ = inorderSucc(root, temp);
 	cout << succ->data;
 	return 0;
 }
