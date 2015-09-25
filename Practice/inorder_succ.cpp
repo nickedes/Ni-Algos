@@ -22,15 +22,29 @@ node* leftest(node* ptr)
 
 node* inorderSucc(node* root, node* temp)
 {
+	node* succ = NULL;
 	if(temp->right != NULL)
 	{
 		return leftest(temp->right);
 	}
 	else
 	{
-		// TODO
-		return temp;
+		while(root != NULL)
+		{
+			if(temp->data < root->data)
+			{
+				succ = root;
+				root = root->left;
+			}
+			else if(temp->data > root->data)
+			{
+				root = root->right;
+			}
+			else
+				break;
+		}
 	}
+	return succ;
 }
 
 node* newNode(int key)
@@ -43,14 +57,17 @@ node* newNode(int key)
 
 int main()
 {
-	struct node* root = NULL;
+	struct node *root = NULL, *temp, *succ;
 	root = newNode(20);
 	root->left = newNode(10);
 	root->right = newNode(30);
 	root->left->left = newNode(5);
 	root->right->right = newNode(40);
-	temp = root->left->left;
+	temp = root->right;
 	succ = inorderSucc(root, temp);
-	cout << succ->data;
+	if(succ)
+		cout << succ->data;
+	else
+		cout << "NULL";
 	return 0;
 }
