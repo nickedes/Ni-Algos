@@ -11,6 +11,26 @@ using namespace std;
 
 #define size 100
 
+int binSearch(array, low, high)
+{
+	int mid = (low + high)/2;
+
+	if(mid % 2)
+	{
+		if (array[mid] == array[mid - 1])
+			return binSearch(array, mid-2, high);
+		else
+			return binSearch(array, low, mid);
+	}
+	else
+	{
+		if (array[mid] == array[mid + 1])
+			return binSearch(array, mid+2, high);
+		else
+			return binSearch(array, low, mid);
+	}
+}
+
 int main()
 {
 	int array[size], num, xor_;
@@ -21,12 +41,7 @@ int main()
 	for(int i = 0; i < num; i++)
 		cin >> array[i];
 
-	xor_ = array[0];
-
-	for(int i = 1; i < num; i++)
-		xor_ ^= array[i];
-
-	cout << endl << "element is : " << xor_;
+	cout << endl << "element is : " << binSearch(array, 0, num-1);
 
 	return 0;
 }
