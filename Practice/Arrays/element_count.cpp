@@ -11,7 +11,7 @@ using namespace std;
 
 #define size 100
 
-int binSearch(array, low, high)
+int binSearch(int array[], int low, int high)
 {
 	if(low == high)
 		return array[low];
