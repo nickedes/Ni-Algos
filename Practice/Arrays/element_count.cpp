@@ -3,7 +3,7 @@ Given a sorted array in which all elements appear twice (one after one)
 and one element appears only once.
 
 Requirement : O(log n) time complexity
-Present : O(n)
+Present : O(log n)
 */
 
 #include <iostream>
@@ -13,6 +13,12 @@ using namespace std;
 
 int binSearch(array, low, high)
 {
+	if(low == high)
+		return array[low];
+	
+	else if(low > high)
+		return 0;
+	
 	int mid = (low + high)/2;
 
 	if(mid % 2)
