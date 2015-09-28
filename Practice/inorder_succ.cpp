@@ -37,9 +37,7 @@ node* inorderSucc(node* root, node* temp)
 				root = root->left;
 			}
 			else if(temp->data > root->data)
-			{
 				root = root->right;
-			}
 			else
 				break;
 		}
