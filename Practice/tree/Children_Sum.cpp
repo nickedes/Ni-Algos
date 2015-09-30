@@ -23,6 +23,23 @@ node* newNode(int data)
 	return(ptr);
 }
 
+void children_sum(node *root)
+{
+	if(root == NULL)
+		return ;
+
+	if(root->left)
+		children_sum(root->left);
+	if(root->right)
+		children_sum(root->right);
+
+	if(root->left)
+		root->data += root->left->data;
+	if(root->right)
+		root->data += root->right->data;
+	return ;
+}
+
 int main()
 {
 	node *root = newNode(50);
