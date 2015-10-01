@@ -27,17 +27,17 @@ void children_sum(node *root)
 {
 	if(root == NULL)
 		return ;
-
-	if(root->left)
+	// cout << root -> data;
+	if(root->left != NULL)
+	{
 		children_sum(root->left);
-	if(root->right)
-		children_sum(root->right);
-
-	if(root->left)
 		root->data += root->left->data;
-	if(root->right)
+	}
+	if(root->right != NULL)
+	{
+		children_sum(root->right);
 		root->data += root->right->data;
-	return ;
+	}
 }
 
 int main()
@@ -49,5 +49,7 @@ int main()
 	root->left->right = newNode(5);
 	root->right->left = newNode(1);
 	root->right->right = newNode(30);
-
+	children_sum(root);
+	// cout << root->data;
+	return 0;
 }
