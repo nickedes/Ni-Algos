@@ -46,6 +46,8 @@ void inorderTraversal(node *root)
 
 node* modify_range(node* root, int min, int max)
 {
+	if(root == NULL)
+		return NULL;
 
 	root->left = modify_range(root->left, min, max);
 	root->right = modify_range(root->right, min, max);
@@ -53,14 +55,13 @@ node* modify_range(node* root, int min, int max)
 	if(root->data > max)
 	{
 		node *ptr = root->left;
-		root = NULL;
+		delete root;
 		return ptr;
 	}
 	else if(root->data < min)
 	{
 		node *ptr = root->right;
-		// delete root;
-		root = NULL;
+		delete root;
 		return ptr;
 	}
 	return root;
