@@ -26,9 +26,23 @@ node* newNode(int data)
 node* insert(node* root, int key)
 {
 	// bst node insertion
+	if(root == NULL)
+		return newNode(key);
+	else if(root->data > key)
+		root->left = insert(root->left, key);
+	else
+		root->right = insert(root->right, key);
+	return root;
 }
 
 int main()
 {
-
+	node *root = NULL;
+	root = insert(root, 6);
+    root = insert(root, -13);
+    root = insert(root, 14);
+    root = insert(root, -8);
+    root = insert(root, 15);
+    root = insert(root, 13);
+    root = insert(root, 7);
 }
