@@ -16,7 +16,7 @@ public:
 
 node* newNode(int data)
 {
-	node *ptr;
+	node *ptr = new node;
 	ptr->data = data;
 	ptr->left = NULL;
 	ptr->right = NULL;
@@ -50,6 +50,6 @@ int main()
 	root->right->left = newNode(1);
 	root->right->right = newNode(30);
 	children_sum(root);
-	// cout << root->data;
+	cout << root->data;
 	return 0;
 }
