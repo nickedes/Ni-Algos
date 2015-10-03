@@ -46,19 +46,22 @@ void inorderTraversal(node *root)
 
 node* modify_range(node* root, int min, int max)
 {
-	if(root ==NULL)
-		return NULL;
+
+	root->left = modify_range(root->left, min, max);
+	root->right = modify_range(root->right, min, max);
+
 	if(root->data > max)
 	{
-		free(root->right);
-		root->right = NULL;
-		root = modify_range(root->left);
+		node *ptr = root->left;
+		root = NULL;
+		return ptr;
 	}
 	else if(root->data < min)
 	{
-		free(root->left);
-		root->left = NULL;
-		root = modify_range(root->right);
+		node *ptr = root->right;
+		// delete root;
+		root = NULL;
+		return ptr;
 	}
 	return root;
 }
@@ -78,9 +81,12 @@ int main()
     cout << "Inorder traversal of the given tree is: ";
     inorderTraversal(root);
 
-    cout << "Enter the range [min, max] : ";
-    cin >> min >> max;
-
+    // cout << "Enter the range [min, max] : ";
+    // cin >> min >> max;
+    min = -10; max = 13;
     root = modify_range(root, min, max);
+
+    cout << endl <<"Inorder traversal of the modified tree is: ";
+    inorderTraversal(root);
     return 0;
 }
