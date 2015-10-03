@@ -35,6 +35,15 @@ node* insert(node* root, int key)
 	return root;
 }
 
+void inorderTraversal(node *root)
+{
+	if(root->left)
+		inorderTraversal(root->left);
+	cout<<root->data<<" ";
+	if(root->right)
+		inorderTraversal(root->right);
+}
+
 int main()
 {
 	node *root = NULL;
@@ -45,4 +54,9 @@ int main()
     root = insert(root, 15);
     root = insert(root, 13);
     root = insert(root, 7);
+
+    cout << "Inorder traversal of the given tree is: ";
+    inorderTraversal(root);
+
+    return 0;
 }
