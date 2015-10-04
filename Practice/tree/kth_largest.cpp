@@ -24,23 +24,18 @@ node* newNode(int key)
 void insert(node *root, int key)
 {
 	node *temp = newNode(key);
-	if(root == NULL)
-		root = temp;
+	if(root->left == NULL)
+	{
+		root->left = temp;
+	}
+	else if(root->right == NULL)
+	{
+		root->right = temp;
+	}
 	else
 	{
-		if(root->left == NULL)
-		{
-			root->left = temp;
-		}
-		else if(root->right == NULL)
-		{
-			root->right = temp;
-		}
-		else
-		{
-			insert(root->left, key);
-			insert(root->right, key);
-		}
+		insert(root->left, key);
+		insert(root->right, key);
 	}
 }
 
@@ -62,19 +57,31 @@ int main()
 	int ch;
 	while(1)
 	{
-		cout << "1. Insert" << "2. Display" << "3. exit";
+		cout << endl << "1. Insert" << endl << "2. Display" << endl << "3. exit" << endl << "Enter ur choice:";
 		cin >> ch;
 		switch(ch)
 		{
 			case 1: //insert
-			break;
-			case 2: //display
-			break;
-			case 3://exit
-			return 0;
-			break;
+				int key;
+				cout << "enter data:";
+				cin >> key;
+				if(root == NULL)
+				{
+					root = newNode(key);
+				}
+				else
+					insert(root, key);
+				break;
+			case 2:
+				//display
+				inorder(root);
+				break;
+			case 3:
+				//exit
+				return 0;
+				break;
 			default:
-			break;
+				break;
 		}
 	}
 	return 0;
