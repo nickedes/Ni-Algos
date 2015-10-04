@@ -21,21 +21,23 @@ node* newNode(int key)
 }
 
 // add to heap tree
-void insert(node *root, int key)
+int insert(node *root, int key)
 {
 	node *temp = newNode(key);
 	if(root->left == NULL)
 	{
 		root->left = temp;
+		return 1;
 	}
 	else if(root->right == NULL)
 	{
 		root->right = temp;
+		return 1;
 	}
 	else
 	{
-		insert(root->left, key);
-		insert(root->right, key);
+		// complete tree insertion way!!!!
+		// use queue!
 	}
 }
 
@@ -47,7 +49,7 @@ void inorder(node *root)
 	if(root == NULL)
 		return;
 	inorder(root->left);
-	cout << root->data;
+	cout << root->data << " ";
 	inorder(root->right);
 }
 
