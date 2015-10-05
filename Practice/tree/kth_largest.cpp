@@ -12,6 +12,14 @@ public:
 	node *right;
 };
 
+//first need to implement a queue!
+struct queue
+{
+	int front, rear;
+	int size;
+	node* *array;
+};
+
 node* newNode(int key)
 {
 	node *ptr = new node;
