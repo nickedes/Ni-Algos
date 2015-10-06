@@ -30,7 +30,7 @@ void enqueue(queue *q, int key)
 		q->rear = q->front;
 		return;
 	}
-	temp->next = q->rear;
+	q->rear->next = temp;
 	q->rear = temp;
 }
 
@@ -46,12 +46,9 @@ int dequeue(queue *q)
 		q->rear = q->front = NULL;
 		return temp->data;
 	}
-	while(ptr->next != q->front)
-		ptr = ptr->next;
-	q->front = ptr;
-	node *temp = ptr->next;
+	node *temp = q->front;
+	q->front = q->front->next;
 	int key = temp->data;
-	ptr->next = NULL;
 	delete temp;
 	return key;
 }
@@ -59,14 +56,14 @@ int dequeue(queue *q)
 
 void printQ(queue *q)
 {
-	node *ptr = q->rear;
-	if(q->rear == NULL)
+	node *ptr = q->front;
+	if(q->front == NULL)
 	{
 		cout << "Empty!";
 		return;
 	}
 	cout << ptr->data << "->";
-	while(ptr!=q->front)
+	while(ptr!=q->rear)
 	{
 		ptr = ptr->next;
 		cout << ptr->data << "->";
@@ -79,7 +76,9 @@ int main()
 	queue *q = new queue;
 	q->front = q->rear = NULL;
 	enqueue(q, 2);
+	printQ(q);
 	enqueue(q, 4);
+	printQ(q);
 	dequeue(q);
 	printQ(q);
 	dequeue(q);
