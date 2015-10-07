@@ -9,6 +9,20 @@ class node
 		node *right;
 };
 
+int isBSTUtil(node* node, int min, int max);
+
+/* Returns true if the given tree is a binary search tree 
+ (efficient version). */
+int isBST(struct node* root)
+{ 
+  return(isBSTUtil(root, INT_MIN, INT_MAX));
+}
+
+int isBSTUtil(node *root, int min, int max)
+{
+	//code for bst check
+}
+
 node* newNode(int key)
 {
 	node *ptr = new node;
