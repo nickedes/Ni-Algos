@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
-
+#define x 5+2
 struct node
 {
 	int data;
@@ -20,4 +20,10 @@ node* newNode(int key)
 	ptr->data = key;
 	ptr->next = NULL;
 	return ptr;
+}
+
+int main()
+{
+	cout << x*x*x;
+	return 0;
 }
