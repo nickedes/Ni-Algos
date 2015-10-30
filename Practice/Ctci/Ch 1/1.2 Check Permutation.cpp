@@ -1,5 +1,6 @@
 /*
-
+Time complexity - O(N)
+Space complexity - O(N) [for hashmap]
  */
 
 #include <iostream>
@@ -33,13 +34,17 @@ bool check_permutation(char first[], char second[])
 		}
 		return 1;
 	}
-	return 1;
+	return 0;
 }
 
 int main()
 {
 	// Take 2 strings
+	char first[SIZE], second[SIZE];
 	
+	cin >> first;
+	cin >> second;
 	// call check permutation
+	cout << check_permutation(first, second);
 	return 0;
 }
