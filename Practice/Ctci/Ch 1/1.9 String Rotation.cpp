@@ -1,6 +1,6 @@
 /*
-Time complexity - O()
-Space complexity - O()
+Time complexity - O(N^2)
+Space complexity - O(1)
  */
 #include <iostream>
 #include <string.h>
@@ -35,8 +35,17 @@ int main()
 	cout << "enter two strings : ";
 	cin >> s1 >> s2;
 	// check s2 is rotation of s1
-	// s1 will be transformed to - s1 + s1
-	// if s2 is a substring of (s1+s1) -> then rotation else not!
-	cout << isSubstring(s1, s2);
+	if(strlen(s1) == strlen(s2))
+	{
+		// s1 will be transformed to -> s1 + s1
+		strcat(s1,s1);
+		// if s2 is a substring of (s1+s1) -> then rotation else not!
+		if(isSubstring(s1, s2))
+			cout << "Yes, a rotation";
+		else
+		cout << "Not a rotation";
+	}
+	else
+		cout << "Not a rotation";
 	return 0;
 }
