@@ -21,7 +21,132 @@ node* newnode(int val)
 
 node* sum_lists(node *head, node *start)
 {
-	return NULL;
+	node *list = NULL;
+	if(head == NULL && start == NULL)
+		return list;
+	else
+	{
+		int carry = 0;
+		node *temp = head;
+		node *ptr = start;
+		node *add = NULL, *last = NULL;
+		while(temp!=NULL && ptr!=NULL)
+		{
+			// sum of nodes
+			if(temp->data + ptr->data + carry > 9)
+			{
+				add = newnode(temp->data + ptr->data + carry - 10);
+				carry = 1;
+			}
+			else
+			{
+				add = newnode(temp->data + ptr->data + carry);
+				carry = 0;
+			}
+
+			// add node to a linked list
+			if(list == NULL)
+			{
+				list = add;
+				// track of last added node
+				last = list;
+			}
+			else
+			{
+				last->next = add;
+				last = add;
+			}
+
+			temp = temp->next;
+			ptr = ptr->next;
+		}
+
+		// first list ends
+		if(!temp && ptr)
+		{
+			last->next = ptr;
+			while(ptr->next!=NULL)
+			{
+				if(ptr->data + carry > 9)
+				{
+					ptr->data = ptr->data + carry - 10;
+					carry = 1;
+				}
+				else
+				{
+					ptr->data = ptr->data + carry;
+					carry = 0;
+				}
+				ptr = ptr->next;
+			}
+
+			if(!ptr)
+			{
+				if(ptr->data + carry > 9)
+				{
+					ptr->data = ptr->data + carry - 10;
+					carry = 1; //last node is 1
+					ptr->next = newnode(carry);
+				}
+				else
+				{
+					ptr->data = ptr->data + carry;
+					carry = 0;
+				}
+			}
+		}
+
+		else if(temp && !ptr)
+		{
+			last->next = temp;
+			while(temp->next!=NULL)
+			{
+				if(temp->data + carry > 9)
+				{
+					temp->data = temp->data + carry - 10;
+					carry = 1;
+				}
+				else
+				{
+					temp->data = temp->data + carry;
+					carry = 0;
+				}
+				temp = temp->next;
+			}
+
+			if(!temp)
+			{
+				if(temp->data + carry > 9)
+				{
+					temp->data = temp->data + carry - 10;
+					carry = 1; //last node is 1
+					temp->next = newnode(carry);
+				}
+				else
+				{
+					temp->data = temp->data + carry;
+					carry = 0;
+				}
+			}
+		}
+
+		else
+		{
+			if(carry)
+				last->next = newnode(carry);
+		}
+	}
+	return list;
+}
+
+void printList(node *head)
+{
+    while (head != NULL)
+    {
+        cout << head->data << " ";
+        head = head->next;
+    }
+    cout << endl;
 }
 
 int main()
@@ -37,6 +162,7 @@ int main()
 	start->next->next = newnode(2);	
 	// start->next->next->next = newnode(12);
 	// start->next->next->next->next = newnode(9);
-	
+	node *added = sum_lists(head, start);
+	printList(added);
 	return 0;
 }
