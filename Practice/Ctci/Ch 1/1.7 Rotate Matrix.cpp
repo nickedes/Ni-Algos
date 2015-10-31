@@ -1,5 +1,7 @@
 /*
-
+In place
+Time complexity - O(NM)
+Space complexity - O(1) ,no extra memory used! except for storing matrix.
  */
 #include <iostream>
 using namespace std;
@@ -11,6 +13,17 @@ int swap(int *x, int *y)
 	*x = *x + *y;
 	*y = *x - *y;
 	*x = *x - *y;
+	return 0;
+}
+
+int display(int arr[SIZE][SIZE])
+{
+	for(int i = 0; i < SIZE; i++)
+	{
+		cout << endl;
+		for(int j = 0; j < SIZE; j++)
+			cout << arr[i][j] << " ";
+	}
 	return 0;
 }
 
@@ -49,12 +62,6 @@ int main()
 		}
 	}
 
-	// display!
-	for(int i = 0; i < SIZE; i++)
-	{
-		for(int j = 0; j < SIZE; j++)
-			cout << arr[i][j] << " ";
-		cout << endl;
-	}
+	display(arr);
 	return 0;
 }
