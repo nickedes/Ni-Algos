@@ -23,11 +23,6 @@ int main()
 	{
 		if(rating[i-1] < rating[i])
 			distri[i] = distri[i-1]+1;
-		else //rating[i-1] > rating[i]
-		{
-			if(distri[i-1] == distri[i])
-				distri[i-1] += 1;
-		}
 	}
 
 	for(int i=n-2; i>=0; i--)
