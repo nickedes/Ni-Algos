@@ -12,39 +12,36 @@ int main()
 	int n;
 	cin >> n;
 
-	int rating[SIZE];
+	int rating[SIZE], distri[SIZE];
 	for (int i = 0; i < n; ++i)
-		cin >> rating[i];
-
-	int flag;
-	// sort the rating in increasing order
-	/*
-	for (int i = 0; i < n; i++)
 	{
-		flag = 1;
-		for (int j = 0; j < n-1; j++)
-		{
-			if(rating[j] > rating[j+1])
-			{
-				int temp;
-				temp = rating[j+1];
-				rating[j+1] = rating[j];
-				rating[j] = temp;
-				flag = 0;
-			}
-		}
-		if(flag)
-			break;
+		cin >> rating[i];
+		distri[i] = 1;
 	}
-	*/
-	int candy = n;
+	
 	for(int i = 1; i < n; i++)
 	{
-		if(rating[i-1]<rating[i])
+		if(rating[i-1] < rating[i])
+			distri[i] = distri[i-1]+1;
+		else //rating[i-1] > rating[i]
 		{
-			candy+=1;
+			if(distri[i-1] == distri[i])
+				distri[i-1] += 1;
 		}
 	}
-	cout << candy;
+
+	for(int i=n-2; i>=0; i--)
+	{
+		if(rating[i] > rating[i+1] && distri[i] <= distri[i+1])
+			distri[i] = distri[i+1] + 1;
+	}
+	int candies = 0;
+	for (int i = 0; i < n; ++i)
+		candies += distri[i];
+
+	// for (int i = 0; i < n; ++i)
+	// 	cout << distri[i] << " ";
+
+	cout << candies;
 	return 0;
 }
