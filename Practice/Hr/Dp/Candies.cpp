@@ -1,5 +1,5 @@
 /*
-Problem : https://www.hackerrank.com/challenges/coin-change
+Problem : https://www.hackerrank.com/challenges/candies
  */
 
 #include <iostream>
