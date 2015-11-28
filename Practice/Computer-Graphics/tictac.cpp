@@ -51,7 +51,7 @@ int object_map[9][2] = {{-6,6},{0,6},{6,6},{-6,0},{0,0},{6,0},{-6,-6},{0,-6},{6,
 GLUquadricObj *Cylinder;
 
 //Timer
-int ctimer = 8;
+int ctimer = 9;
 int ctflag = 0;
 
 string time_string(int num){
@@ -319,7 +319,7 @@ void Draw_X(int x, int y, int z, int a)
     glPopMatrix();
     
 }
-
+int new_g = 0;
 // Draw our world
 void display(void)
 {
@@ -348,6 +348,7 @@ void display(void)
     if(ctflag == 50) {
     	ctimer--;
     	if(ctimer == -1) {
+            new_g = 1;
             start_game = 0;
             if(turn == 1)
             {
@@ -369,6 +370,16 @@ void display(void)
     if (win == -1) Sprint( -3, 8, "O wins");
     if (win == 2) Sprint( -3, 8, "Tie");
     
+    if(new_g == 1)
+    {
+        // for(int j = 0; j < 1000000000; j++);
+        // printf("lolo");
+        new_g = 0;
+        for( i = 0; i < 9; i++)
+        {
+            box_map[i] = 0;
+        }
+    }
  // Setup view, and print view state on screen
     if (view_state == 1)
 	{
