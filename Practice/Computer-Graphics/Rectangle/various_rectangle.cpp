@@ -5,7 +5,6 @@ Various operations for Rectangle - LOL
 #include "GL/gl.h"
 
 static GLfloat spin = 0.0;
-static GLfloat x = 0.0;
 void init(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -35,8 +34,8 @@ void reshape(int w, int h)
 
 void show_spin(void)
 {
-	spin += 2.0;
-	x += 1.0;
+	// handling spins
+	spin -= 2.0;
 	glutPostRedisplay();
 }
 
