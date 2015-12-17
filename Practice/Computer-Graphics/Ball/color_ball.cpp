@@ -7,9 +7,12 @@ using namespace std;
 
 #define WIDTH 600
 #define HEIGHT 600
-GLfloat xRotated, yRotated, zRotated;
+GLfloat cx = 300.0, cy = 300.0, r = 100.0;
+int num_segments = 1000;
 GLdouble radius=1;
 GLfloat y = 0.0;
+
+float color[3] = {0.0, 0.0, 0.0};
 void init(void)
 {
 	// all 1 -> white
@@ -17,14 +20,31 @@ void init(void)
 	glShadeModel(GL_FLAT);
 }
 
+void DrawCircle(int index) 
+{ 
+	glColor3f(color[0], color[1], color[2]);
+	glBegin(GL_LINE_LOOP); 
+	for(int ii = 0; ii < num_segments; ii++) 
+	{ 
+		float theta = 2.0f * 3.1415926f * float(ii) / float(num_segments);//get the current angle 
+
+		float x = r * cosf(theta);//calculate the x component 
+		float y = r * sinf(theta);//calculate the y component 
+
+		glVertex2f(x + cx, y + cy);//output vertex 
+
+	} 
+	glEnd(); 
+}
+
 void drawCurrentColor(void)
 {
 	glColor3f(1.0, 1.0, 0.0);
 	glBegin(GL_POLYGON);
-    glVertex3f(50, 10, 0);
-    glVertex3f(80, 10, 0);
-    glVertex3f(80, 35, 0);
-    glVertex3f(50, 35, 0);
+    glVertex3f(550, 10, 0);
+    glVertex3f(580, 10, 0);
+    glVertex3f(580, 35, 0);
+    glVertex3f(550, 35, 0);
     glEnd();
 }
 
