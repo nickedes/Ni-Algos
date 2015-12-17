@@ -31,7 +31,7 @@ void DrawSphere()
     // scaling transfomation 
     // glScalef(1.0,1.0,1.0);
     // built-in (glut library) function , draw you a sphere.
-    glutSolidSphere(radius,20,20);
+    glutSolidSphere(radius,100,100);
 }
 
 void display(void)
@@ -56,7 +56,7 @@ void reshape(int w, int h)
 
 void show()
 {
-	y += 0.1;
+	y += 0.05;
 	if( y > 5.0)
 		y = -5.0;
 	cout << y << endl;
