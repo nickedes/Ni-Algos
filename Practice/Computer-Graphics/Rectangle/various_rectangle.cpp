@@ -4,6 +4,8 @@ Various operations for Rectangle - LOL
 #include "GL/freeglut.h"
 #include "GL/gl.h"
 
+static GLfloat spin = 0.0;
+static GLfloat x = 0.0;
 void init(void)
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -14,6 +16,7 @@ void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glPushMatrix();
+	glRotatef(spin, 0.0, 0.0, 1.0);
 	glColor3f(1.0, 0.0, 1.0);
 	glRectf(-25.0, -25.0, 25.0, 25.0);
 	glPopMatrix();
@@ -30,6 +33,21 @@ void reshape(int w, int h)
 	glLoadIdentity();
 }
 
+void show_spin(void)
+{
+	spin += 2.0;
+	x += 1.0;
+	glutPostRedisplay();
+}
+
+void mouse(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+		glutIdleFunc(show_spin);
+	else if (button == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN)
+		glutIdleFunc(NULL);
+}
+
 int main(int argc, char *argv[])
 {
 	glutInit(&argc, argv);
@@ -42,6 +60,8 @@ int main(int argc, char *argv[])
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
+	// for handling mouse events
+	glutMouseFunc(mouse);
 	glutMainLoop();
 	return 0;
 }
