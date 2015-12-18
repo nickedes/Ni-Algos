@@ -54,7 +54,7 @@ void display(void)
 	glPushMatrix();
 	// draw sphere
 	drawCurrentColor();
-	//DrawSphere();
+	DrawCircle(1);
 	glPopMatrix();
 	glutSwapBuffers();
 }
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 	glutCreateWindow("Sphere");
 
 	init();
-	xRotated = yRotated = zRotated = 30.0;
+	// xRotated = yRotated = zRotated = 30.0;
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
 	// for handling mouse events
