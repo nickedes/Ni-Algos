@@ -7,7 +7,7 @@ using namespace std;
 #define WIDTH 600
 #define HEIGHT 600
 
-GLfloat cx = 100.0, cy = 300.0, r = 50.0;
+GLfloat cx = 100.0, cy = 300.0, r = 20.0, xpos = 0.0, ypos = 0.0;
 int segs = 100;
 
 void init(void)
@@ -61,27 +61,38 @@ void reshape(int w, int h)
 
 void moveback()
 {
-	
+	if(cx > 100.0)
+		cx -= 1.0;
+	glutPostRedisplay();
 }
 
 void moveforward()
 {
-
+	if(cx < 500.0)
+		cx += 1.0;
+	glutPostRedisplay();
 }
 void keyb(unsigned char key, int x, int y)
 {
 	if(key == 'a')
 	{
-		glutIdleFunc(moveback);
+		if(cx > 100.0)
+			cx -= 1.0;
+		// glutIdleFunc(moveback);
 		cout << "a";
+		key = 'w';
 	}	
 	else if(key == 'd')
 	{
-		glutIdleFunc(moveforward);
+		// glutIdleFunc(moveforward);
 		cout << "d";
+		key = 'w';
+		if(cx < 500.0)
+		cx += 1.0;
 	}
 	else
 		cout << "w";
+	glutPostRedisplay();
 }
 
 int main(int argc, char **argv)
