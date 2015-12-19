@@ -5,55 +5,138 @@
 #define WIDTH 600
 #define HEIGHT 6009
 
-void display(void)
-{
-/*  clear all pixels  */
-    glClear (GL_COLOR_BUFFER_BIT);
+// #include <GL/glut.h>
 
-/*  draw white polygon (rectangle) with corners at
- *  (0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)  
- */
-    glColor3f (1.0, 1.0, 1.0);
-    glBegin(GL_POLYGON);
-        glVertex3f (0.25, 0.25, 0.0);
-        glVertex3f (0.75, 0.25, 0.0);
-        glVertex3f (0.75, 0.75, 0.0);
-        glVertex3f (0.25, 0.75, 0.0);
+static float zoom_factor = 0.5;
+
+float ver[8][3] = 
+{
+    {-0.5 , -0.5 , 0.5}  ,
+    {-0.5 , 0.5  , 0.5}  ,
+    {0.5  , 0.5  , 0.5}  ,
+    {0.5  , -0.5 , 0.5}  ,
+    {-0.5 , -0.5 , -0.5} ,
+    {-0.5 , 0.5  , -0.5} ,
+    {0.5  , 0.5  , -0.5} ,
+    {0.5  , -0.5 , -0.5} ,
+};
+
+GLfloat color[8][3] = 
+{
+    {0.1 , 0.1  , 0.1} ,
+    {0.2 , 0.2  , 0.2} ,
+    {0.3 , 0.3  , 0.3} ,
+    {0.4 , 0.4  , 0.4} ,
+    {0.5 , 0.5  , 0.5} ,
+    {0.6 , 0.6  , 0.6} ,
+    {0.7 , 0.7  , 0.7} ,
+    {0.8 , 0.8  , 0.8} ,
+};
+
+void mouse_events(int button, int state, int x, int y)
+{
+   // Wheel reports as button 3(scroll up) and button 4(scroll down)
+   if ((button == 3) || (button == 4)) // It's a wheel event
+   {
+       // Each wheel event reports like a button click, GLUT_DOWN then GLUT_UP
+       // if (state == GLUT_UP) return; // Disregard redundant GLUT_UP events
+ 
+        zoom_factor += 0.5;
+
+       // printf("Scroll %s At %d %d\n", (button == 3) ? "Up" : "Down", x, y);
+   }
+   // else{  // normal button event
+   //      zoom_factor -= 0.5;
+   //     // printf("Button %s At %d %d\n", (state == GLUT_DOWN) ? "Down" : "Up", x, y);
+   // }
+}
+
+void quad(int a,int b,int c,int d)
+{
+    glBegin(GL_QUADS);
+
+    glColor3fv(color[a]); glVertex3fv(ver[a]);
+    glColor3fv(color[b]); glVertex3fv(ver[b]);
+    glColor3fv(color[c]); glVertex3fv(ver[c]);
+    glColor3fv(color[d]); glVertex3fv(ver[d]);
+
     glEnd();
-
-/*  don't wait!  
- *  start processing buffered OpenGL routines 
- */
-    glFlush ();
 }
 
-void init (void) 
+void colorcube()
 {
-/*  select clearing (background) color       */
-    glClearColor (0.0, 0.0, 0.0, 0.0);
+    quad(0 , 3 , 2 , 1);
+    quad(2 , 3 , 7 , 6);
+    quad(0 , 4 , 7 , 3);
+    quad(1 , 2 , 6 , 5);
+    quad(4 , 5 , 6 , 7);
+    quad(0 , 1 , 5 , 4);
+}
 
-/*  initialize viewing values  */
-    glMatrixMode(GL_PROJECTION);
+double rotate_y = 0; 
+double rotate_x = 0;
+void key_events( int key, int x, int y ) 
+{
+    if (key == GLUT_KEY_UP)
+        zoom_factor += 0.5;
+
+    else if (key == GLUT_KEY_DOWN)
+        zoom_factor -= 0.5;
+
+    else if (key == GLUT_KEY_RIGHT)
+        rotate_x += 5;
+
+    else if (key == GLUT_KEY_LEFT)
+        rotate_y += 5;
+
+    glutPostRedisplay();
+}
+
+void display()
+{
+    glClearColor( 0, 0, 0, 1 );
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
-    glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+    int w = glutGet( GLUT_WINDOW_WIDTH );
+    int h = glutGet( GLUT_WINDOW_HEIGHT );
+
+    gluPerspective(3.0*zoom_factor, w / h, 0.1, 500 );
+
+    glMatrixMode( GL_MODELVIEW );
+    glLoadIdentity();
+    gluLookAt
+        ( 
+            3, 3, 3, 
+            0, 0, 0,
+            0, 0, 1
+        );
+
+    glRotatef( rotate_x, 1.0, 0.0, 0.0 );
+    glRotatef( rotate_y, 0.0, 1.0, 0.0 );
+
+    colorcube();
+
+    glutSwapBuffers();
 }
 
-/* 
- *  Declare initial window size, position, and display mode
- *  (single buffer and RGBA).  Open window with "hello"
- *  in its title bar.  Call initialization routines.
- *  Register callback function to display graphics.
- *  Enter main loop and process events.
- */
-int main(int argc, char** argv)
+int main( int argc, char **argv )
 {
-    glutInit(&argc, argv);
-    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize (250, 250); 
-    glutInitWindowPosition (100, 100);
-    glutCreateWindow ("hello");
-    init ();
-    glutDisplayFunc(display);
+    glutInit( &argc, argv );
+    
+    glutInitDisplayMode( GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE );
+    
+    glutInitWindowSize( 1024, 768 );
+    glutCreateWindow( "Cube Fun" );
+    
+    glutDisplayFunc( display );
+
+    glutSpecialFunc( key_events );
+    glutMouseFunc( mouse_events );
+    
+    glEnable( GL_DEPTH_TEST );
+    
     glutMainLoop();
-    return 0;   /* ISO C requires main to return int. */
+    return 0;
 }
