@@ -49,13 +49,12 @@ int main()
 			// step 3
 			swap(word[max_j], word[max_k]);
 			// step 4
-			int l;
-			for (l = 0; word[l] < '\0'; ++l);
-			for (int k = max_j+1; k < l; ++k)
-			{
+			int l=0;
+			for (l = 0; word[l] != '\0'; l++);
+			l--;
+			for (int k = max_j+1; k < l; k++,l--)
 				swap(word[k], word[l]);
-				l--;
-			}
+
 			cout << word;
 		}
 		cout << endl;
