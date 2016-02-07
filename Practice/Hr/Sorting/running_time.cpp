@@ -1,5 +1,5 @@
 /*
-Problem : https://www.hackerrank.com/challenges/insertionsort1
+Problem : https://www.hackerrank.com/challenges/runningtime
  */
 
 #include <iostream>
@@ -14,7 +14,7 @@ int main()
 	cin >> n;
 	for (int i = 0; i < n; ++i)
 		cin >> arr[i];
-	for (i = 1; i < n; i++)
+	for (int i = 1; i < n; i++)
     {
        key = arr[i];
        j = i-1;
