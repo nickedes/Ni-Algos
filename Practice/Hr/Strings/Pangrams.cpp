@@ -17,7 +17,7 @@ int main()
 	{
 		s[i] = (char)tolower(s[i]);
 		int c = s[i]-'a';
-		if(map[c] == 0)
+		if(map[c] == 0 && c<26 && c>=0)
 		{
 			map[c] = 1;
 			count--;
