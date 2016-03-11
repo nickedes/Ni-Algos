@@ -3,6 +3,7 @@ Problem : https://www.hackerrank.com/challenges/game-of-thrones
 */
 
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 
 int main()
@@ -15,8 +16,7 @@ int main()
 	for (int i = 0; i < b.length(); ++i)
 		freq_b[b[i]-'a']++;
 	for (int i = 0; i < 26; ++i)
-	{
-
-	}
+		count += abs(freq_a[i]-freq_b[i]) ;
+	cout << count;
 	return 0;
 }
