@@ -18,7 +18,7 @@ int main()
 	}
 	count_sum[0] = arr[0];
 	for (int i = 1; i < 100; ++i)
-		count_sum[i] += arr[i];
-	for (int i = 1; i < 100; ++i)
+		count_sum[i] = count_sum[i-1] + arr[i];
+	for (int i = 0; i < 100; ++i)
 		cout << count_sum[i] << " ";
 }

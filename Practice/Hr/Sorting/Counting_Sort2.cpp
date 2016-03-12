@@ -1,5 +1,5 @@
 /*
-Problem : https://www.hackerrank.com/challenges/countingsort1
+Problem : https://www.hackerrank.com/challenges/countingsort2
  */
 
 #include <iostream>
@@ -16,5 +16,8 @@ int main()
 		arr[num]++;
 	}
 	for (int i = 0; i < 100; ++i)
-		cout << arr[i] << " ";
+	{
+		for (int j = 0; j < arr[i]; ++j)
+			cout << i <<" ";
+	}
 }
