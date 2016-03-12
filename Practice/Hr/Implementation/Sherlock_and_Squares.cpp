@@ -19,13 +19,8 @@ int main()
 	cin >> tests;
 	while(tests--)
 	{
-		int A, B, count = 0;
+		int A, B;
 		cin >> A >> B;
-		for (int i = A; i <= B; ++i)
-		{
-			if(check_sq(i))
-				count++;
-		}
-		cout << count << endl;
+		cout << (int)(floor(sqrt(B))-ceil(sqrt(A))+1) << endl;
 	}
 }
