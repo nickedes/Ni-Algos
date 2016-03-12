@@ -1,7 +1,7 @@
 /*
 Problem : https://www.hackerrank.com/challenges/maximise-sum
  */
-#include<iostream>
+#include <iostream>
 using namespace std;
  
 int maxSubArraySum(int a[], int size, int m)
