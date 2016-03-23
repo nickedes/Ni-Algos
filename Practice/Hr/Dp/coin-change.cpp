@@ -9,28 +9,20 @@ using namespace std;
 
 int main()
 {
-	int N, M, coin[SIZE], map[SIZE];
-	cin>>N>>M;
-	for (int i = 0; i < M; ++i)
-	{
-		cin>>coin[i];
-	}
+	long long int N, M, coin[SIZE], map[SIZE];
+	cin >> N >> M;
 
-	int table[N+1];
+	for(long long int i = 0; i < M; ++i)
+		cin>>coin[i];
+
+	long long int table[N+1] = {0};
 
 	//base case
 	table[0] = 1;
-	for(int i=1; i <= N; i++)
-		table[i] = 0;
 
-	for(int i=1; i<=M;i++)
-	{
-		for(int j=1; j<=N;j++)
-		{
-			if(j >= coin[i-1])
-				table[j] += table[j-coin[i-1]];
-		}
-	}
+	for(long long int i = 0; i < M; i++)
+		for(long long int j=coin[i]; j <= N;j++)
+			table[j] += table[j-coin[i]];
 
 	cout << table[N];
 	return 0;
