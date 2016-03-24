@@ -1,5 +1,5 @@
 /*
-https://www.hackerrank.com/challenges/red-john-is-back
+Problem : https://www.hackerrank.com/challenges/red-john-is-back
  */
 #include <iostream>
 using namespace std;
@@ -26,7 +26,7 @@ void markMultiples(bool arr[], int a, int n)
     }
 }
 
-#define SIZE 40
+#define SIZE 41
 
 int main()
 {
