@@ -1,3 +1,9 @@
+/*
+Given an array of n elements which contains elements from 0 to n-1, with any of
+these numbers appearing any number of times. Find these repeating numbers in 
+O(n) and using only constant memory space.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
