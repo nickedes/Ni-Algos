@@ -1,38 +1,55 @@
 #include <stdio.h>
 
-int rec(int n, int num_coins, int coins[])
+int change(int N, int coin[], int m)
 {
-	if(n == 0)
+	if(N == 0)
 		return 1;
-	else if(n < 0)
+
+	if(N < 0)
 		return 0;
-	else if(num_coins <= 0)
+
+	if(m < 1 && N > 0)
 		return 0;
-	return rec(n, num_coins-1, coins) + rec(n-coins[num_coins-1], num_coins, coins);
+
+	return change(N, coin, m-1) + change(N-coin[m-1], coin, m);
+}
+
+int value(int N, int coin[], int m)
+{
+	int i, j, table[N+1][m], x, y;
+
+	for (i = 0; i < m; ++i)
+		table[0][i] = 1;
+
+	for (i = 1; i < N+1; ++i)
+	{
+		for (j = 0; j < m; ++j)
+		{
+			x = (j > 0) ? table[i][j-1] : 0;
+			y = (i >= coin[j]) ? table[i-coin[j]][j] : 0;
+			table[i][j] = x+y;
+		}
+	}
+
+	return table[N][m-1];
 }
 
 int main()
 {
-	int N, coins[100], num_coins, i, j;
+	int N, m, i;
+	printf("Enter N:");
+	scanf("%d", &N);
 
-	printf("Enter N and num_coins \n");
-	scanf("%d %d", &N, &num_coins);
+	printf("Enter no. of coins:");
+	scanf("%d", &m);
 
-	int sum[N+1];
-	for(i = 0; i < num_coins; i++)
-		scanf("%d", &coins[i]);
+	int coin[m];
 
-	printf("%d\n", rec(N, num_coins, coins));
+	printf("Enter valued coins:");
+	for (i = 0; i < m; ++i)
+		scanf("%d", &coin[i]);
 
-	for(i = 0; i <= N; ++i)
-		sum[i] = 0;
-	
-s	um[0] = 1;
-	for(i = 0; i < num_coins; i++)
-	{
-		for(j = coins[i]; j <= N; j++)
-			sum[j] += sum[j-coins[i]];
-	}
-	printf("%d\n", sum[N]);
+	printf("%d\n", change(N, coin, m));	
+	printf("%d\n", value(N, coin, m));	
 	return 0;
 }
