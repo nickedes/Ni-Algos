@@ -1,38 +1,68 @@
 #include <stdio.h>
 
-int max(int x, int y)
+int max(int a, int b)
 {
-	return x > y ? x : y;
+	return a > b ? a : b;
 }
 
-int main()
+int LengthOfPal(char string[], int low, int high)
 {
-	int i, len, c, j;
-	char arr[100];
-	printf("Enter string\n");
-	scanf("%s", arr);
+	if(low == high)
+		return 1;
 
-	for(i = 0; arr[i] != '\0'; ++i);
-	len = i;
-	
-	int dp[len][len];
+	if(string[low] == string[high] && low + 1 == high)
+		return 2;
 
-	for (i = 0; i < len; ++i)
-		dp[i][i] = 1;
+	if(string[low] == string[high])
+		return 2 + LengthOfPal(string, low + 1, high - 1);
+	else
+		return max(LengthOfPal(string, low + 1, high), LengthOfPal(string, low, high - 1));
+}
 
-	for(c = 2; c <= len; c++)
+int LongestPal(char string[], int length)
+{
+	int L[length][length], i, j, c;
+
+	for (i = 0; i < length; ++i)
 	{
-		for(i = 0; i < len-c+1; ++i)
-		{	
-			j = c+i-1;
-			if(arr[i] == arr[j] && c == 2)
-				dp[i][j] = 2;
-			else if(arr[i] == arr[j])
-				dp[i][j] = dp[i+1][j-1] + 2;
+		L[i][i] = 1;
+	}
+
+	for (c = 2; c <= length; ++c)
+	{
+		for (i = 0; i < length - c + 1; ++i)
+		{
+			j = i + c - 1;
+			if(string[i] == string[j] && i + 1 == j)
+			{
+				L[i][j] = 2;
+			}
+			else if(string[i] == string[j])
+			{
+				L[i][j] = 2 + L[i+1][j-1];
+			}
 			else
-				dp[i][j] = max(dp[i+1][j], dp[i][j-1]);
+			{
+				L[i][j] = max(L[i][j-1], L[i+1][j]);
+			}
 		}
 	}
-	printf("%d\n", dp[0][len-1]);
+
+	return L[0][length-1];
+}
+
+int main(int argc, char const *argv[])
+{
+	int i, n;
+	char string[100];
+	printf("enter string\n");
+	scanf("%s", string);
+
+	for (i = 0; string[i] != '\0'; ++i);
+	// printf("%d\n", i);
+	// printf("%s\n", string);
+
+	printf("%d\n", LengthOfPal(string, 0, i-1));
+	printf("%d\n", LongestPal(string, i));
 	return 0;
 }
