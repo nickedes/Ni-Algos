@@ -20,20 +20,22 @@ int knapsackDP(int weight[], int profit[], int n, int knapSackWeight)
 {
 	int table[n+1][knapSackWeight+1], i, j;
 
-	for (i = 0; i < n+1; ++i)
-	{
-		table[i][0] = 0;
-	}
+	// for (i = 0; i < n+1; ++i)
+	// {
+	// 	table[i][0] = 0;
+	// }
 
-	for (j = 0; j < knapSackWeight+1; ++j)
-	{
-		table[0][j] = 0;
-	}
+	// for (j = 0; j < knapSackWeight+1; ++j)
+	// {
+	// 	table[0][j] = 0;
+	// }
 
 	for (i = 1; i < n+1; ++i)
 	{
 		for (j = 0; j < knapSackWeight+1; ++j)
 		{
+			if(i == 0 || j == 0)
+				table[i][j] = 0;
 			if(weight[i-1] > j)
 				table[i][j] = table[i-1][j];
 			else
