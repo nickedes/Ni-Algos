@@ -1,44 +1,38 @@
 #include <stdio.h>
 
-int min(x, y, z)
+#define MAX 100
+
+int min(int a, int b, int c)
 {
-	return x > y ? (y > z ? z : y):(x > z? z : x);
+	return a > b ? (b > c ? c : b) : (a > c ? c : a) ;
+}
+
+int editDisRecur(char str1[], char str2[], int n, int m)
+{
+	if(n == 0 || m == 0)
+		return (n > 0 ? n : m);
+
+	if(str1[n-1] == str2[m-1])
+		return editDisRecur(str1, str2, n-1, m-1);
+
+	return 1 + min( editDisRecur(str1, str2, n, m-1),
+					editDisRecur(str1, str2, n-1, m),
+					editDisRecur(str1, str2, n-1, m-1) );
 }
 
 int main()
 {
-	int l1, l2, i, j;
-	char str1[100], str2[100];
-
-	printf("Enter both strings:\n");
+	int i, n = 0, m = 0;
+	char str1[MAX], str2[MAX];
+	printf("enter 2 strings\n");
 	scanf("%s", str1);
 	scanf("%s", str2);
 
-	for(i=0; str1[i]!='\0'; ++i);
-	l1 = i;
-	for(i=0; str2[i]!='\0'; ++i);
-	l2 = i;
-	
-	int dp[l1+1][l2+1];
+	for (i = 0; str1[i] != '\0'; ++i)
+		n++;
 
-	for (i = 0; i <= l1; ++i)
-	{
-		for (j = 0; j <= l2; ++j)
-		{
-			if(i == 0)
-				dp[i][j] = j;
+	for (i = 0; str2[i] != '\0'; ++i)
+		m++;
 
-			else if(j == 0)
-				dp[i][j] = i;
-
-			else if(str1[i] == str2[j])
-				dp[i][j] = dp[i-1][j-1];
-			else
-			{
-				dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
-			}
-		}
-	}
-	printf("%d\n", dp[l1][l2]);
-	return 0;
+	printf("%d\n", editDisRecur(str1, str2, n, m));
 }
