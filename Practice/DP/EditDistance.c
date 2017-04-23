@@ -20,6 +20,32 @@ int editDisRecur(char str1[], char str2[], int n, int m)
 					editDisRecur(str1, str2, n-1, m-1) );
 }
 
+int editDistance(char str1[], char str2[], int n, int m)
+{
+	int i, j, table[n+1][m+1];
+
+	for (i = 0; i < n+1; ++i)
+	{
+		for (j = 0; j < m+1; ++j)
+		{
+			if(i == 0)
+				table[i][j] = j;
+			else if(j == 0)
+				table[i][j] = i;
+			else if( str1[i] == str2[j])
+			{
+				table[i][j] = table[i-1][j-1];
+			}
+			else
+			{
+				table[i][j] = 1 + min(table[i][j-1], table[i-1][j], table[i-1][j-1]);
+			}
+		}
+	}
+
+	return table[n][m];
+}
+
 int main()
 {
 	int i, n = 0, m = 0;
@@ -35,4 +61,6 @@ int main()
 		m++;
 
 	printf("%d\n", editDisRecur(str1, str2, n, m));
+
+	printf("%d\n", editDistance(str1, str2, n, m));
 }
