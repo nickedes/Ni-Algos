@@ -23,7 +23,7 @@ int BFSiterative(int s)
             int w = adj[v][i];
             if(visited[w] == 0)
             {
-                level[w] = level[p] + 1;
+                level[w] = level[v] + 1;
                 S.push(w);
                 visited[w] = 1;
             }
@@ -50,7 +50,7 @@ int main()
         if(visited[i] == 0)
             BFSiterative(i);
 
-    cout << endl;
+    cout << endl << "Node - Level" << endl;
     for (int i = 1; i <= nodes; ++i)
         cout << i << "-" << level[i] << endl;
 
