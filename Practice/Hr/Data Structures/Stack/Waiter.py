@@ -13,14 +13,10 @@ for p in range(2, size+1):
     if not arr[p]:
         primes.append(p)
 
-print(primes)
-
 n, q = list(map(int, input().split()))
 plates = list(map(int, input().split()))
 a = [plates]
-b = []
-for i in range(q):
-    b.append([])
+b = [[] for _ in range(q)]
 
 for i in range(1, q+1):
     prime = primes[i-1]
@@ -29,8 +25,16 @@ for i in range(1, q+1):
         item = a[i-1].pop()
         length -= 1
         if item % prime == 0:
-            b[i].append(item)
+            b[i-1].append(item)
         else:
             if i >= len(a):
                 a.append([])
             a[i].append(item)
+
+
+for x in b:
+    if len(x):
+        print('\n'.join(map(str, x[::-1])))
+
+if a[q] and a[q] != [] and len(a[q]):
+    print('\n'.join(map(str, a[q][::-1])))
