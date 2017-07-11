@@ -9,9 +9,9 @@ def bfs(s, n, r, graph):
     visited = set()
     a, b = s[0:2]
     S.put((a, b + 1, 1, 1))
+    S.put((a - 1, b, 0, 1))
     S.put((a + 1, b, 0, 1))
     S.put((a, b - 1, 1, 1))
-    S.put((a - 1, b, 0, 1))
     visited.add((a, b))
     while not S.empty():
         node = S.get()
@@ -24,9 +24,9 @@ def bfs(s, n, r, graph):
                 break
             # print(node)
             S.put((a, b + 1, 1, cost + 1 if direct == 0 else cost))
+            S.put((a - 1, b, 0, cost + 1 if direct == 1 else cost))
             S.put((a + 1, b, 0, cost + 1 if direct == 1 else cost))
             S.put((a, b - 1, 1, cost + 1 if direct == 0 else cost))
-            S.put((a - 1, b, 0, cost + 1 if direct == 1 else cost))
             visited.add((a, b))
 
 
@@ -43,5 +43,6 @@ for i in range(n):
     graph.append(newrow)
 
 a, b, c, d = list(map(int, input().split()))
-
+graph[a][b] = 0
+# print(graph)
 bfs((a, b, 0, 0), n, (c, d), graph)
