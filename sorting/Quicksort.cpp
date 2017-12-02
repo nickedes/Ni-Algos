@@ -1,13 +1,15 @@
 #include <iostream>
+#include <time.h>
 #include <stdlib.h>
 
-#define max 10
+#define max 10000
 using namespace std;
 
 int quicksort(int a[],int,int);
 int partition(int a[],int,int);
 int main()
 {
+	clock_t t;
 	int a[max],i;	
 	srand(time(NULL));
 	// for random no.s
@@ -17,11 +19,13 @@ int main()
 	for(i=0;i<max;i++)
 		cout<<" "<<a[i];
 
+	t = clock();
 	quicksort(a,0,max-1);
+	t = clock() - t;
 	cout<<"\n Sorted array: ";
 	for(i=0;i<max;i++)
 		cout<<" "<<a[i];
-	
+	cout << endl << "clocks : " << t;
 	return 0;
 }
 int quicksort(int a[],int p,int r)

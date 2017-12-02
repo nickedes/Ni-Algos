@@ -1,4 +1,5 @@
 #include <iostream>
+#include <time.h>
 #include <stdlib.h>
 #include <math.h>
 #define max 10000
@@ -9,7 +10,7 @@ int merge(int a[],int,int,int);
 int main ()
 {
 	int a[max],i,p=0,r=max-1;
-	
+	clock_t t;
 	srand(time(NULL));
 	// for random no.s
 	for(i=0;i<max;i++)
@@ -24,12 +25,15 @@ int main ()
 	}
 	*/	
 	cout<<"\n"<<"sorted:\n";
+	t = clock();
 	mergesort(a,p,r);
+	t = clock() - t;
 	cout<<"\n";
 	
 	for(i=p;i<=r;i++)
 		cout<<" "<<a[i];
 	cout<<"\n sorted : "<<z;
+	cout << endl << "clocks : " << t;
 	return 0;
 }
 
