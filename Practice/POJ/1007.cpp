@@ -1,26 +1,44 @@
 // http://poj.org/problem?id=1007
 #include <iostream>
 #include <stdio.h>
+#include <string.h>
 using namespace std;
 
-int main()
+int merge(char string[], int low, int mid, int high)
 {
-	int length, number;
-	cin >> length >> number;
+	int temp[high - low + 1];
 
-	char strings [number][length];
-	for (int i = 0; i < number; ++i)
+	int i = low, j = mid+1, k = 0, invCount = 0;
+
+	for (;i < mid && j > mid;)
 	{
-		cin >> strings[i];
+		if(string[i] < string[j])
+		{
+			temp[k++] = string[i++];
+		}
+		else
+		{
+			temp[k++] = string[j--];
+			invCount += mid - i - 1;
+		}
 	}
 
+	for (;i <= mid;)
+	{
+		temp[k++] = string[i++];
+	}
 
-	return 0;
-}
+	for (;j >= mid;)
+	{
+		temp[k++] = string[j--];
+	}
 
-int getInvCount(char string[])
-{
+	for (i = low; i <= high; ++i)
+	{
+		string[i] = temp[i];
+	}
 
+	return invCount;
 }
 
 int mergesort(char string[], int low, int high)
@@ -34,32 +52,22 @@ int mergesort(char string[], int low, int high)
 	return invCount;
 }
 
-
-int merge(char string[], int low, int mid, int high)
+int getInvCount(char string[], int length)
 {
-	int temp[high - low + 1];
+	cout << mergesort(string, 0, length);
+	return 0;
+}
 
-	int i = low, j = mid+1, k = 0;
+int main()
+{
+	int length, number;
+	cin >> length >> number;
 
-	for (;i < mid && j > mid;)
+	char strings [number][length];
+	for (int i = 0; i < number; ++i)
 	{
-		if(string[i] < string[j])
-		{
-			temp[k++] = string[i++];
-		}
-		else
-		{
-			temp[k++] = string[j--];
-		}
+		cin >> strings[i];
+		getInvCount(strings[i], length);
 	}
-
-	for (;i <= mid;)
-	{
-		temp[k++] = string[i++];
-	}
-
-	for (;j >= mid;)
-	{
-		temp[k++] = string[j--];
-	}
+	return 0;
 }
