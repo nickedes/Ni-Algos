@@ -3,7 +3,8 @@ Ni-Algos
 
 My solutions to algorithms implemented in C++.
 
-#How to run
+## How to run
+
 Compile the file:
 
 ```g++ file.cpp```
